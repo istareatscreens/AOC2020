@@ -1,0 +1,11 @@
+#Ignore everything
+*
+!*/
+*/*
+
+#Dont ignore
+!/.gitignore
+!/d*/*.txt
+!/d*/*.cpp
+!/d*/*.h
+
