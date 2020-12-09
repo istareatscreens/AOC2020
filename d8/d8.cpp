@@ -23,14 +23,14 @@ void p1(vector<string> lines, regex acc, regex jmp){
    int i{};
    while(true){
        if(!(instructions.find(i) == instructions.end())){
-			cout<<"LAST INSTRUCTION: "<<i;
+			//cout<<"LAST INSTRUCTION: "<<i<<endl;
 			break;
 		}
       istringstream ss{lines[i].substr(3)};
       int number;
       ss>>number;
       string instruction{lines[i].substr(0,3)};
-		cout<<instruction<<" "<<number<<endl;
+		//cout<<instruction<<" "<<number<<endl;
       pair<string,int> values {instruction, number};
 		instructions.insert({i,values});
       if(regex_search(lines[i],match, acc)){
@@ -43,7 +43,7 @@ void p1(vector<string> lines, regex acc, regex jmp){
 			i++;
       }
    }
-cout<<accumulator;
+   cout<<endl<<"P1 ANS: "<<accumulator;
 
 }
 
@@ -119,6 +119,7 @@ int main(){
        if(static_cast<long unsigned int>(i) == lines.size()) break;
    }
 
+   p1(lines, acc, jmp);
 	cout<<endl<<"ACCUMULATOR: "<<accumulator;
 
 }
