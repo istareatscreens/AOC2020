@@ -5,6 +5,7 @@
 DEBUG
 
 #Dont ignore
+!/README.md
 !/.gitignore
 !/d*/*.txt
 !/d*/*.cpp
