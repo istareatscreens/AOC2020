@@ -30,18 +30,18 @@ void debug(seatMatrix &seats){
    cout << endl;
 }
 
-bool checkPosition(int x, int y, vector<pair<int,int>> &coordinates, seatMatrix &oldArrangement, unordered_map<char,int> &spots){
+bool checkPosition(int x, int y, vector<pair<int,int>> &coordinates, seatMatrix &oldArrangement, int &spots){
    if(oldArrangement[x][y]=='L'){
       return true;
    }else if(oldArrangement[x][y] == '#'){
-         spots[oldArrangement[x][y]]++;
+         spots++;
          return true;
    }
    return false;
 }
 
 void applyRulesP2(int i, int j, seatMatrix &seats, seatMatrix &oldArrangement){
-   unordered_map<char,int> spots;
+   int spots{};
    //cout<<"i: "<<i<<", "<<"j: "<<j<<endl;
    
    vector<pair<int,int>> coordinates;
@@ -52,7 +52,7 @@ void applyRulesP2(int i, int j, seatMatrix &seats, seatMatrix &oldArrangement){
     //    cout<<"k: "<<k;
     //    cout<<", m: "<<m<<endl;
         if(oldArrangement[k][m]=='#'){
-          spots[oldArrangement[k][m]]++;
+         spots++;
         }else if(oldArrangement[k][m] == '.'){
           coordinates.push_back({k,m});
         }
@@ -98,17 +98,17 @@ DONE:;
       }
 
       //cout<<"RESULTS: "<< spots['#']<<endl;
-   if(seats[i][j] == '#' && spots['#'] >4){
+   if(seats[i][j] == '#' && spots>4){
       seats[i][j] = 'L';
 //      cout<<"HERE";
-   }else if(seats[i][j] == 'L' && spots['#'] == 0){
+   }else if(seats[i][j] == 'L' && spots == 0){
       seats[i][j] = '#';
    }
 }
 
 
 void applyRules(int i, int j, seatMatrix &seats, seatMatrix &oldArrangement){
-   unordered_map<char,int> spots;
+   int spots;
 //   cout<<"i: "<<i<<", "<<"j: "<<j<<endl;
    
    for(int k = i - 1; k<i+2 && k<static_cast<int>(seats.size()); k++){
@@ -117,14 +117,14 @@ void applyRules(int i, int j, seatMatrix &seats, seatMatrix &oldArrangement){
         if((k==i && j==m) || m<0) continue;
 //        cout<<"k: "<<k;
 //        cout<<", m: "<<m<<endl;
-         spots[oldArrangement[k][m]]++;
+         spots++;
       }
    }
 
-   if(seats[i][j] == '#' && spots['#'] >3){
+   if(seats[i][j] == '#' && spots >3){
       seats[i][j] = 'L';
 //      cout<<"HERE";
-   }else if(seats[i][j] == 'L' && spots['#'] == 0){
+   }else if(seats[i][j] == 'L' && spots == 0){
       seats[i][j] = '#';
    }
 }
@@ -149,7 +149,6 @@ int main(){
    
    ifstream file{"i.txt"};
 
-   //if(regex_search(lines[i],match, acc))
    seatMatrix seats;
 
    string row;
